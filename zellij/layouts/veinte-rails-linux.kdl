@@ -32,18 +32,18 @@ layout {
     pane split_direction="vertical" {
       pane {
         cwd "~/dev/veinte/api"
-        command "zsh"
-        args "-c" "source ~/.zshrc && bundle exec rails s"
-        start_suspended true
       }
       pane split_direction="horizontal" {
         pane {
           cwd "~/dev/veinte/api"
+          command "zsh"
+          args "-c" " source ~/.zshrc && bundle exec sidekiq"
+          start_suspended true
         }
         pane {
           cwd "~/dev/veinte/api"
           command "zsh"
-          args "-c" " source ~/.zshrc && bundle exec sidekiq"
+          args "-c" "source ~/.zshrc && bundle exec rails s"
           start_suspended true
         }
       }
