@@ -1,29 +1,9 @@
 ## Rails
 alias be="bundle exec"
 alias bi="bundle install"
-alias rg="rails g"
-alias rs="rails s"
-alias rc="rails c"
-alias rn="rails new"
-alias rd="rails dbconsole"
-alias rp="rails plugin"
-alias ra="rails application"
-alias rd="rails destroy"
-alias prythis="pry -r ./config/environment"
-
-## rake
-alias rt="rake test"
-alias rtu="rake test:units"
-alias rtf="rake test:functionals"
-alias rti="rake test:integration"
-alias rro="rake routes"
-alias rdbm="rake db:migrate"
-alias rdbrb="rake db:rollback"
-alias rdbs="rake db:seed"
-alias rdbr="rake db:reset"
-alias ri="rake install"
-alias ru="rake update"
-alias rr="rake run"
+alias rs="bundle exec rails s"
+alias rc="bundle exec rails c"
+alias prom="bundle exec prometheus_exporter"
 
 ## Utility Aliases
 alias ~="cd ~"
@@ -44,6 +24,12 @@ alias ys='yarn start'
 alias yi='yarn install'
 alias yt='yarn test'
 alias ytw='yarn test:watch'
+
+# pnpm
+alias pd='pnpm dev'
+alias pi='pnpm install'
+alias pt='pnpm tsc'
+alias pf='pnpm format'
 
 # Docker
 alias drm='docker rm'
