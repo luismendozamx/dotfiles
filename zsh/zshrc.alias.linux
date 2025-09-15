@@ -14,7 +14,6 @@ alias night="hyprctl hyprsunset temperature 4500"
 # Zellij
 alias z="zellij"
 alias zveinte="z --layout ~/dev/config/dotfiles/zellij/layouts/veinte-rails-linux.kdl"
-alias zbeek="z --layout ~/dev/config/dotfiles/zellij/layouts/beek-rails-linux.kdl"
 alias zm="z --layout ~/dev/config/dotfiles/zellij/layouts/musa-rails-linux.kdl"
 
 # Git aliases
@@ -51,7 +50,6 @@ alias dotfiles="cd ~/dev/config/dotfiles"
 alias dev="cd ~/dev"
 alias config="cd ~/dev/config"
 alias labs="cd ~/dev/labs"
-alias talks="cd ~/dev/talks"
 alias journal="cd ~/dev/personal/journal"
 alias blog="cd ~/dev/personal/mendoza.io"
 alias personal="cd ~/dev/personal"
