@@ -82,45 +82,4 @@ layout {
       }
     }
   }
-  tab name="tunnel" {
-    pane split_direction="vertical" {
-      pane {
-        cwd "~/dev/veinte/tunnel"
-        focus true
-      }
-      pane split_direction="horizontal" {
-        pane {
-          cwd "~/dev/veinte/tunnel"
-        }
-        pane {
-          cwd "~/dev/veinte/tunnel"
-          command "zsh"
-          args "-c" " source ~/.zshrc && PORT=3001 bundle exec rails s"
-          start_suspended true
-        }
-      }
-    }
-  }
-  tab name="bots" {
-    pane split_direction="vertical" {
-      pane {
-        cwd "~/dev/veinte/bots"
-        focus true
-      }
-      pane split_direction="horizontal" {
-        pane {
-          cwd "~/dev/veinte/bots"
-          command "zsh"
-          args "-c" " source ~/.zshrc && yarn dev"
-          start_suspended true
-        }
-        pane {
-          cwd "~/dev/veinte/bots"
-          command "zsh"
-          args "-c" " source ~/.zshrc && yarn dev-worker"
-          start_suspended true
-        }
-      }
-    }
-  }
 }
