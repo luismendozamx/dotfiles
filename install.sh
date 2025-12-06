@@ -81,21 +81,28 @@ copy_file() {
 echo -e "${BLUE}📁 Creating ~/.config directory if it doesn't exist...${NC}"
 mkdir -p "$HOME/.config"
 
+# Check if omarchy configuration exists
+OMARCHY_EXISTS=false
+if [[ -d "$HOME/.local/share/omarchy" ]]; then
+  OMARCHY_EXISTS=true
+  echo -e "${YELLOW}⚠️  Omarchy configuration detected - skipping ghostty, hyprland, wofi, waybar, btop, and cursor${NC}"
+fi
+
 # Install configs that go to ~/.config/
 echo -e "\n${BLUE}🔧 Installing application configs to ~/.config/...${NC}"
 
 # Ghostty terminal
-if [[ -d "$DOTFILES_DIR/ghostty" ]]; then
+if [[ "$OMARCHY_EXISTS" == false && -d "$DOTFILES_DIR/ghostty" ]]; then
   create_symlink "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty" "Ghostty terminal config"
 fi
 
 # Hyprland (Linux only)
-if [[ "$OS" == "linux" && -d "$DOTFILES_DIR/hypr" ]]; then
+if [[ "$OMARCHY_EXISTS" == false && "$OS" == "linux" && -d "$DOTFILES_DIR/hypr" ]]; then
   create_symlink "$DOTFILES_DIR/hypr" "$HOME/.config/hypr" "Hyprland window manager config"
 fi
 
 # btop system monitor
-if [[ -d "$DOTFILES_DIR/btop" ]]; then
+if [[ "$OMARCHY_EXISTS" == false && -d "$DOTFILES_DIR/btop" ]]; then
   create_symlink "$DOTFILES_DIR/btop" "$HOME/.config/btop" "btop system monitor config"
 fi
 
@@ -105,12 +112,12 @@ if [[ -d "$DOTFILES_DIR/kitty" ]]; then
 fi
 
 # Waybar (Linux only)
-if [[ "$OS" == "linux" && -d "$DOTFILES_DIR/waybar" ]]; then
+if [[ "$OMARCHY_EXISTS" == false && "$OS" == "linux" && -d "$DOTFILES_DIR/waybar" ]]; then
   create_symlink "$DOTFILES_DIR/waybar" "$HOME/.config/waybar" "Waybar config"
 fi
 
 # Wofi launcher (Linux only)
-if [[ "$OS" == "linux" && -d "$DOTFILES_DIR/wofi" ]]; then
+if [[ "$OMARCHY_EXISTS" == false && "$OS" == "linux" && -d "$DOTFILES_DIR/wofi" ]]; then
   create_symlink "$DOTFILES_DIR/wofi" "$HOME/.config/wofi" "Wofi launcher config"
 fi
 
@@ -143,33 +150,35 @@ else
 fi
 
 # Cursor editor settings
-echo -e "\n${BLUE}🖱️  Installing Cursor editor settings...${NC}"
-# Copy VSCode settings to Cursor
-if [[ -f "$DOTFILES_DIR/vscode/settings.json" ]]; then
-  if [[ "$OS" == "mac" ]]; then
-    CURSOR_CONFIG_DIR="$HOME/Library/Application Support/Cursor/User"
-  else
-    CURSOR_CONFIG_DIR="$HOME/.config/Cursor/User"
-  fi
-  
-  create_symlink "$DOTFILES_DIR/vscode/settings.json" "$CURSOR_CONFIG_DIR/settings.json" "Cursor settings"
-  create_symlink "$DOTFILES_DIR/vscode/keybindings.json" "$CURSOR_CONFIG_DIR/keybindings.json" "Cursor keybindings"
-fi
+if [[ "$OMARCHY_EXISTS" == false ]]; then
+  echo -e "\n${BLUE}🖱️  Installing Cursor editor settings...${NC}"
+  # Copy VSCode settings to Cursor
+  if [[ -f "$DOTFILES_DIR/vscode/settings.json" ]]; then
+    if [[ "$OS" == "mac" ]]; then
+      CURSOR_CONFIG_DIR="$HOME/Library/Application Support/Cursor/User"
+    else
+      CURSOR_CONFIG_DIR="$HOME/.config/Cursor/User"
+    fi
 
-if [[ -d "$DOTFILES_DIR/cursor" ]]; then
-  if [[ "$OS" == "linux" ]]; then
-    # Install Cursor desktop file and icon
-    if [[ -f "$DOTFILES_DIR/cursor/cursor.desktop" ]]; then
-      create_symlink "$DOTFILES_DIR/cursor/cursor.desktop" "$HOME/.local/share/applications/cursor.desktop" "Cursor desktop file"
-    fi
-    if [[ -f "$DOTFILES_DIR/cursor/cursor.png" ]]; then
-      mkdir -p "$HOME/.local/share/icons"
-      create_symlink "$DOTFILES_DIR/cursor/cursor.png" "$HOME/.local/share/icons/cursor.png" "Cursor icon"
-    fi
-    if [[ -f "$DOTFILES_DIR/cursor/cursor" ]]; then
-      mkdir -p "$HOME/.local/bin"
-      create_symlink "$DOTFILES_DIR/cursor/cursor" "$HOME/.local/bin/cursor" "Cursor executable"
-      chmod +x "$HOME/.local/bin/cursor"
+    create_symlink "$DOTFILES_DIR/vscode/settings.json" "$CURSOR_CONFIG_DIR/settings.json" "Cursor settings"
+    create_symlink "$DOTFILES_DIR/vscode/keybindings.json" "$CURSOR_CONFIG_DIR/keybindings.json" "Cursor keybindings"
+  fi
+
+  if [[ -d "$DOTFILES_DIR/cursor" ]]; then
+    if [[ "$OS" == "linux" ]]; then
+      # Install Cursor desktop file and icon
+      if [[ -f "$DOTFILES_DIR/cursor/cursor.desktop" ]]; then
+        create_symlink "$DOTFILES_DIR/cursor/cursor.desktop" "$HOME/.local/share/applications/cursor.desktop" "Cursor desktop file"
+      fi
+      if [[ -f "$DOTFILES_DIR/cursor/cursor.png" ]]; then
+        mkdir -p "$HOME/.local/share/icons"
+        create_symlink "$DOTFILES_DIR/cursor/cursor.png" "$HOME/.local/share/icons/cursor.png" "Cursor icon"
+      fi
+      if [[ -f "$DOTFILES_DIR/cursor/cursor" ]]; then
+        mkdir -p "$HOME/.local/bin"
+        create_symlink "$DOTFILES_DIR/cursor/cursor" "$HOME/.local/bin/cursor" "Cursor executable"
+        chmod +x "$HOME/.local/bin/cursor"
+      fi
     fi
   fi
 fi
