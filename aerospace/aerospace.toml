@@ -52,7 +52,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -80,6 +80,8 @@ run = 'layout floating'
     "3" = ["secondary", "main"]
     "4" = ["secondary", "main"]
     "5" = ["main"]
+    "6" = ["main"]
+    "7" = ["main"]
 
 # Make Chrome windows floating so they take full width
 # [[on-window-detected]]
@@ -161,6 +163,8 @@ run = 'layout floating'
     cmd-3 = 'workspace 3'
     cmd-4 = 'workspace 4'
     cmd-5 = 'workspace 5'
+    cmd-6 = 'workspace 6'
+    cmd-7 = 'workspace 7'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -168,6 +172,8 @@ run = 'layout floating'
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
